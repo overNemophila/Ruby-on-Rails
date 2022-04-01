@@ -1,0 +1,42 @@
+<div class="card mt-3">
+  <div class="card-header">
+    本日のチャージ
+  </div>
+  <div class="card-body">
+    <p class="card-text">
+      <span class="text-primary"><%= @deposits.sum(&:amount) %> 円</span>
+      <span class="text-secondary">(+ボーナス <%= @deposits.sum(&:bonus_amount) %> 円)</span>
+    </p>
+    <%= link_to("詳細", shop_deposits_path, class: "btn btn-primary") %>
+  </div>
+</div>
+
+<div class="card mt-3">
+  <div class="card-header">
+    本日の消費金額
+  </div>
+  <div class="card-body">
+    <p class="card-text">
+      <span class="text-primary"><%= @deposit_usages.sum(&:amount) %> 円</span>
+    </p>
+    <%= link_to("詳細", shop_usages_path, class: "btn btn-primary") %>
+  </div>
+</div>
+
+<div class="card mt-3">
+  <div class="card-header">
+    チャージパターン
+  </div>
+  <div class="card-body">
+    <% @shop_deposit_patterns.each do |shop_deposit_pattern| %>
+      <p>
+        <b><%= shop_deposit_pattern.name %></b> <%= shop_deposit_pattern.amount %>円 (+<%= shop_deposit_pattern.bonus_amount %>円)
+      </p>
+    <% end %>
+    <%= link_to("詳細", shop_deposit_patterns_path, class: "btn btn-primary") %>
+  </div>
+</div>
+
+<p>
+  <%= link_to("user home", root_path) if Rails.env.development? %>
+</p>

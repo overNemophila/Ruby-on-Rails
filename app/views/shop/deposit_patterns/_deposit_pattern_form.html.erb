@@ -1,0 +1,27 @@
+<div class="row mt-5">
+  <div class="col-sm-6 col-lg-4">
+    <%= form_with model: @shop_deposit_pattern || ShopDepositPattern.new do |f| %>
+      <div class="mb-3">
+        <%= f.label :name, "タイトル", class: "form-label" %>
+        <%= f.text_field :name, class: "form-control" %>
+      </div>
+
+      <div class="mb-3">
+        <%= f.label :description, "説明", class: "form-label" %>
+        <%= f.text_area :description, class: "form-control" %>
+      </div>
+
+      <div class="mb-3">
+        <%= f.label :amount, "チャージ金額", class: "form-label" %>
+        <%= f.number_field :amount, class: "form-control" %>
+      </div>
+
+      <div class="mb-3">
+        <%= f.label :bonus_amount, "ボーナス金額", class: "form-label" %>
+        <%= f.number_field :bonus_amount, class: "form-control" %>
+      </div>
+
+      <%= f.submit "保存する", class: "btn btn-primary" %>
+    <% end %>
+  </div>
+</div>

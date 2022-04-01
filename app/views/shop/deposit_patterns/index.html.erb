@@ -1,0 +1,22 @@
+<h3>チャージパターン</h3>
+
+<p>
+  <%= link_to "新規追加", new_shop_deposit_pattern_path %>
+</p>
+
+<div class="card">
+  <ul class="list-group list-group-flush">
+    <% @shop_deposit_patterns.each do |shop_deposit_pattern| %>
+      <li class="list-group-item">
+        <h5><%= shop_deposit_pattern.name %></h5>
+        <p><%= shop_deposit_pattern.description %></p>
+        <p>
+          チャージ金額：<%= shop_deposit_pattern.amount %><br>
+          ボーナス金額：<%= shop_deposit_pattern.bonus_amount %>
+        </p>
+        <%= link_to "編集", edit_shop_deposit_pattern_path(shop_deposit_pattern) %>
+        <%= link_to "削除", shop_deposit_pattern_path(shop_deposit_pattern), method: :delete %>
+      </li>
+    <% end %>
+  </ul>
+</div>

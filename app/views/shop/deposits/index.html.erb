@@ -1,0 +1,29 @@
+<%= render "shop/home/calendars" %>
+
+<h3>
+  本日のチャージ総額
+  <span class="text-primary"><%= @deposits.sum(&:amount) %> 円</span>
+  <span class="text-secondary">(+ボーナス <%= @deposits.sum(&:bonus_amount) %> 円)</span>
+</h3>
+
+<table class="table">
+  <tr>
+    <th></th>
+    <th>チャージ金額</th>
+    <th>ボーナス</th>
+    <th>時間</th>
+    <th>担当</th>
+  </tr>
+  <% @deposits.each_with_index do |deposit, i| %>
+    <tr>
+      <td><%= i + 1 %></td>
+      <td><%= deposit.amount %></td>
+      <td><%= deposit.bonus_amount %></td>
+      <td><%= l deposit.deposited_at %></td>
+      <td><%= deposit.shop_administrator&.email %></td>
+    </tr>
+  <% end %>
+</table>
+<%= paginate @deposits %>
+
+

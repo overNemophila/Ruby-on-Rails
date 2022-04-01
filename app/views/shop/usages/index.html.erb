@@ -1,0 +1,24 @@
+<%= render "shop/home/calendars" %>
+
+<h3>
+  本日の消費金額
+  <span class="text-primary"><%= @deposit_usages.sum(&:amount) %> 円</span>
+</h3>
+
+<table class="table">
+  <tr>
+    <th></th>
+    <th>消費金額</th>
+    <th>時間</th>
+    <th>担当</th>
+  </tr>
+  <% @deposit_usages.each_with_index do |deposit_usage, i| %>
+    <tr>
+      <td><%= i + 1 %></td>
+      <td><%= deposit_usage.amount %></td>
+      <td><%= l deposit_usage.used_at %></td>
+      <td><%= deposit_usage.shop_administrator&.email %>>
+    </tr>
+  <% end %>
+</table>
+<%= paginate @deposit_usages %>

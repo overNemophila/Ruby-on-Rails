@@ -1,0 +1,2 @@
+class ShopError < StandardError
+end

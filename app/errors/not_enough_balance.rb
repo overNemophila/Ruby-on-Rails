@@ -1,0 +1,2 @@
+class NotEnoughBalance < ShopError
+end

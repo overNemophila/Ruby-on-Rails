@@ -1,0 +1,17 @@
+<% provide(:title, 'お支払い・チャージ') %>
+<% provide(:jumbotron) do %>
+  <h1>お支払い・チャージ</h1>
+<% end %>
+
+<div class="text-center">
+  <p class="text-success">店員にQRコードを提示してください</p>
+  <canvas class="qrcode col-sm-4 col-6" data-content="<%= new_payment_url(user_id: current_user.id, token: current_user.payment_token) %>"></canvas>
+  <% if @shop %>
+    <div>
+      残高 <span class="text-primary fs-2"><%= current_user.balance_at(@shop) %></span> 円
+    </div>
+  <% end %>
+</div>
+<%= javascript_pack_tag 'qrcode', 'data-turbolinks-track': 'reload' %>
+
+<%= link_to("QRコードの向き先", new_payment_path(user_id: current_user.id, token: current_user.payment_token)) if Rails.env.development? %>

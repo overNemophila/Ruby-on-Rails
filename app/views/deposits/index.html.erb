@@ -1,0 +1,39 @@
+<% provide(:title, '残高') %>
+<% provide(:jumbotron) do %>
+  <h1>残高</h1>
+<% end %>
+
+<% if @deposits.empty? %>
+  <p class="card-text">
+    現在利用中の店舗はございません。チャージしてからご利用ください
+    <br>
+  </p>
+<% end %>
+<% @deposits.each do |shop, deposits| %>
+  <div class="card mb-3">
+    <div class="row g-0">
+      <div class="col-4">
+        <img src="<%= shop.image_url %>" width="100%" alt="...">
+      </div>
+      <div class="col-8">
+        <div class="card-body">
+          <h5 class="card-title"><%= shop.name %></h5>
+          <h2 class="card-text text-success mt-3">
+            残高:
+            <%= deposits.sum(&:balance) %>
+            円
+          </h2>
+          <p class="card-text">
+            チャージ総額:
+            <%= deposits.sum(&:total_amount) %>
+            円
+            <br>
+            <%= link_to "履歴", history_deposits_path(shop_id: shop.id) %>
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+<% end %>
+
+<%= link_to("お支払い・チャージ", new_deposit_path) %>

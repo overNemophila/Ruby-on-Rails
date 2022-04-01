@@ -1,0 +1,56 @@
+<% provide(:title, '残高') %>
+<% provide(:jumbotron) do %>
+  <h1><%= @shop.name %> 履歴</h1>
+<% end %>
+
+<% @deposits.each do |deposit| %>
+  <div class="card mb-3">
+    <div class="card-body">
+      <table class="table text-end">
+        <thead>
+          <tr>
+            <th></th>
+            <th>項目</th>
+            <th>金額</th>
+            <th>日時</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>*</td>
+            <td>チャージ</td>
+            <td>+<%= deposit.amount %></td>
+            <td><%= l deposit.deposited_at %></td>
+          </tr>
+          <% if deposit.bonus_amount > 0 %>
+            <tr>
+              <td>*</td>
+              <td>ボーナス</td>
+              <td>+<%= deposit.bonus_amount %></td>
+              <td><%= l deposit.deposited_at %></td>
+            </tr>
+          <% end %>
+        </tbody>
+        <tbody>
+          <% deposit.deposit_usages.each_with_index do |usage, i| %>
+            <tr>
+              <td><%= i + 1 %></td>
+              <td>消費</td>
+              <td>-<%= usage.amount %></td>
+              <td><%= l usage.used_at %></td>
+            </tr>
+          <% end %>
+        </tbody>
+        <thead>
+          <tr>
+            <th></th>
+            <th>残高</th>
+            <th><%= deposit.balance %></th>
+            <th></th>
+          </tr>
+        </thead>
+      </table>
+    </div>
+  </div>
+<% end %>
